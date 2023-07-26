@@ -1,0 +1,14 @@
+body{
+    background-color: slategray;
+}
+
+#logo{
+    margin-left: -80px !important;
+}
+
+.carrito{
+    display: flex;
+    width: 30px;
+    height: 30px;
+}
+
