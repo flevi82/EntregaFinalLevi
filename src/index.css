@@ -12,3 +12,25 @@ body{
     height: 30px;
 }
 
+.panel{
+    border: 1px solid slategray;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    background: gainsboro;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+.botonera{
+    display: flex;
+    justify-content: center;
+
+}
+
+.contador{
+    margin-top: 15px;
+    padding: 10px;
+}
+
