@@ -1,10 +1,11 @@
+import { NavLink } from "react-router-dom"
 
 function CartWidget() {
   return (
-    <div className="carrito">
+    <NavLink to="./carrito" className="carrito">
         <img src="/cartwhite.svg" alt="carrito" />
         <p>1</p>
-    </div> 
+    </NavLink> 
   )
 }
 

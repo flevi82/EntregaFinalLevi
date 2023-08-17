@@ -1,9 +1,16 @@
-body{
-    background-color: slategray;
-}
+
 
 #logo{
-    margin-left: -80px !important;
+    margin-left: 20px !important;
+}
+
+#links{
+    margin-right: 50px !important;
+}
+
+#tarjetas{
+    padding: 20px;
+    gap: 5px;
 }
 
 .carrito{
@@ -13,14 +20,16 @@ body{
 }
 
 .panel{
-    border: 1px solid slategray;
     width: fit-content;
     height: fit-content;
     border-radius: 5px;
     background: gainsboro;
-    flex-direction: column;
     align-items: center;
     padding: 5px;
+}
+
+.botonAgregar{
+    padding: 30px;  
 }
 
 .botonera{
@@ -32,5 +41,10 @@ body{
 .contador{
     margin-top: 15px;
     padding: 10px;
+}
+
+.producto-imagen{
+    height: 200px;
+    object-fit: contain;
 }
 

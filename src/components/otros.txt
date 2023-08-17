@@ -1,0 +1,89 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const Home = () => <div>Home Page</div>;
+const About = () => <div>About Page</div>;
+const Contact = () => <div>Contact Page</div>;
+
+const App = () => {
+  return (
+    <Router>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar.Brand href="/">React-Bootstrap NavLinks</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <NavLink exact activeClassName="active" to="/" className="nav-link">
+              Home
+            </NavLink>
+            <NavLink activeClassName="active" to="/about" className="nav-link">
+              About
+            </NavLink>
+            <NavLink activeClassName="active" to="/contact" className="nav-link">
+              Contact
+            </NavLink>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+      </Switch>
+    </Router>
+  );
+};
+
+navBar original
+
+{/* 
+      <Navbar expand="lg" className="bg-dark" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="#home" id='logo'>
+            <img
+              src="/logoblanco.svg"
+              width="100"
+              height="30"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+          <Nav>
+            <Nav.Item>
+              <Link to ="#home">Consultorio</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to ="#link">Hogar</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to ="#link">Niños</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to ="#link">Adultos</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link>
+                <CartWidget />
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar> */
+
+export default App;
+
+{if (links.id=== undefined) {
+          setData(datos)
+        } else {
+          const prueba = setData(datos.filter(producto => producto.category === "men's clothing").map(producto => ({
+            id: producto.id,
+            nombre: producto.title
+          })));
+          console.log(prueba)
+        }
+      })

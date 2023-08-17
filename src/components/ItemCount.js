@@ -24,17 +24,16 @@ function ItemCount({stock, initial, onAdd}) {
         setContador(0);
         console.log(onAdd)
       }
-    }
-   
+    }  
   return (
     <div className="panel d-flex">
-    <div className="botonera d-flex align-items-center">
-    <Button variant="secondary" height="20" width="20" onClick={sumar}>+</Button>
-    <p className="contador">Contador: {contador}</p>
-    <Button variant="secondary" height="20" width="20" onClick={restar}>-</Button>
+    <div className="botonera d-flex align-items-center justify-content-start">
+    <Button variant="outline-dark" height="15" width="15" onClick={sumar}>+</Button>
+    <p className="contador">Cantidad: {contador}</p>
+    <Button variant="outline-dark" height="15" width="15" onClick={restar}>-</Button>
     </div>
     <div className="botonAgregar">
-    <Button variant="secondary" height="20" width="80" onClick={agregar}>Agregar al carrito</Button> 
+    <Button variant="primary"  onClick={agregar}>Agregar al carrito</Button> 
     </div>
     </div>
   );
