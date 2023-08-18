@@ -1,4 +1,6 @@
-
+body{
+    background-color: slategray;
+}
 
 #logo{
     margin-left: 20px !important;
