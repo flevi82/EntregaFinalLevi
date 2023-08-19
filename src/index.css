@@ -1,5 +1,9 @@
 body{
-    background-color: slategray;
+background-image: url(../public/geometric.svg);
+background-size: cover;
+background-position: left;
+
+
 }
 
 #logo{
@@ -13,6 +17,11 @@ body{
 #tarjetas{
     padding: 20px;
     gap: 5px;
+    background-color: rgba(255, 255, 255, 0.451) !important;
+}
+
+#tarjetaIndividual{
+    background-color: rgba(255, 255, 255, 0.562) !important;
 }
 
 .carrito{

@@ -14,9 +14,9 @@ function NavBar() {
         <Navbar.Brand id='logo'>
           <NavLink  to='/' className="nav-link">
             <img
-              src="/logoblanco.svg"
+              src="/vandalay.svg"
               width="100"
-              height="30"
+              height="80"
               className="d-inline-block align-top"
               alt="React Bootstrap logo"
             />
@@ -26,16 +26,10 @@ function NavBar() {
         <Navbar.Collapse className="justify-content-end" >
           <Nav className="mr-auto" id='links' >
             <NavLink  to='./categ/1' className="nav-link">
-              Men
+              Celulares
             </NavLink>
             <NavLink  to='./categ/2' className="nav-link">
-              Women
-            </NavLink>
-            <NavLink  to='./categ/3' className="nav-link">
-              Jewelery
-            </NavLink>
-            <NavLink  to='./categ/4' className="nav-link">
-              Electronics
+              Laptop
             </NavLink>
             <NavLink  to='./carrito' className="nav-link">
               <CartWidget />

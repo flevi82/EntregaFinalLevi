@@ -8,8 +8,6 @@ function ItemDetailContainer() {
   const links = useParams()
   console.log(links.id)
 
-
-
   useEffect(()=>{
     get1Producto();
   },[links])
@@ -18,21 +16,26 @@ function ItemDetailContainer() {
 
     setTimeout(()=>{
      
-      fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(datos =>   
-        setProducto(datos.find(producto => producto.id === parseInt(links.id,10)))
-    )
-        console.log(producto)
-
-    }, 2000)
+      fetch('https://dummyjson.com/products')
+        .then(res => res.json())
+        .then(datos => {if (true){
+          const filtroId = datos.products.filter(productor => productor.id === parseInt(links.id,10)).map(productor => ({
+            images: productor.images,
+            title: productor.title,
+            price: productor.price,
+            description: productor.description,
+            id: productor.id,
+            stock: productor.stock
+          }
+          ))
+        setProducto(filtroId[0])
+        }}
+        )
+    }, 2000)    
     }
 
-
   return (
-  <>
    <ItemDetail producto={producto}/>
-  </>
   )
 }
 

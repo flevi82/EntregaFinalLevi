@@ -1,12 +1,9 @@
 
 import ItemList from './ItemList';
 
-function ItemListContainer(greeting) {
+function ItemListContainer() {
   return (
-    <>
-    <h2>Hola {greeting.nombre}, Bienvenido a Fono.ar</h2>
     <ItemList/>
-    </>
   )
 }
 

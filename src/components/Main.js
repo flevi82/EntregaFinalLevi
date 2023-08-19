@@ -7,7 +7,7 @@ import ItemDetailContainer from "./ItemDetailContainer"
 function Main() {
   return (
     <Routes>
-        <Route path="/" element={<ItemListContainer nombre="Fernando"/>} />
+        <Route path="/" element={<ItemListContainer/>} />
         <Route path="/categ/:id" element={<ItemListContainer/>} />
         <Route path="/item/:id" element={<ItemDetailContainer/>} />
         <Route path="/categ/:id/item/:id" element={<ItemDetailContainer/>} />
