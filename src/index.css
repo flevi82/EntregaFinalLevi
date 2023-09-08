@@ -59,3 +59,18 @@ background-position: left;
     object-fit: contain;
 }
 
+.carga{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.cargando{
+    color: #acc9c3;
+    padding: 10px;
+}
+
+.spinner{
+    margin-top: 22px;
+}
+

@@ -1,12 +1,14 @@
 import ItemDetail from './ItemDetail';
 import { useEffect, useState, } from "react"
 import { useParams } from "react-router-dom";
+import { db } from "../base"
+import { getDoc, doc , collection } from "firebase/firestore"
 
 function ItemDetailContainer() {
 
   const [producto, setProducto] = useState([])
   const links = useParams()
-  console.log(links.id)
+  const dinam = links.id
 
   useEffect(()=>{
     get1Producto();
@@ -16,21 +18,19 @@ function ItemDetailContainer() {
 
     setTimeout(()=>{
      
-      fetch('https://dummyjson.com/products')
-        .then(res => res.json())
-        .then(datos => {if (true){
-          const filtroId = datos.products.filter(productor => productor.id === parseInt(links.id,10)).map(productor => ({
-            images: productor.images,
-            title: productor.title,
-            price: productor.price,
-            description: productor.description,
-            id: productor.id,
-            stock: productor.stock
-          }
-          ))
-        setProducto(filtroId[0])
-        }}
-        )
+      const productosCollection = collection(db, "productos")
+      const refProd = doc(productosCollection,dinam)
+      const obtener1Producto = getDoc(refProd)
+      
+        obtener1Producto
+            .then((resultado) =>{
+              setProducto(resultado.data())
+            })
+
+            .catch((error) => {
+              console.log("Dio mal")
+          })
+
     }, 2000)    
     }
 
