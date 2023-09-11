@@ -6,13 +6,13 @@ import { getDoc, doc , collection } from "firebase/firestore"
 
 function ItemDetailContainer() {
 
-  const [producto, setProducto] = useState([])
+  const [producto, setProducto] = useState({})
   const links = useParams()
   const dinam = links.id
 
   useEffect(()=>{
     get1Producto();
-  },[links])
+  },[])
 
   const get1Producto = ()=>{
 

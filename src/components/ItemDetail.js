@@ -5,13 +5,12 @@ import Col from 'react-bootstrap/Col';
 import ItemCount from './ItemCount';
 import Spinner from './Spinner';
 import { useContext, useState, useEffect} from 'react';
-import { CartContext } from '../context/CartContext';
+import { contexto } from '../context/CartContext';
 
 
 function ItemDetail(prop) {
 
-  const {carrito, setCarrito} = useContext(CartContext)
-  console.log(carrito)
+  const carrito = useContext(contexto)
   const [cantidad, setCantidad] = useState(1)
   const [nuevoStock, setNuevoStock] = useState(null)
 
@@ -32,28 +31,24 @@ function ItemDetail(prop) {
     cantidad < prop.producto.stock && setCantidad (cantidad +1)
   }
 
-  
-
   const handleAgregar = () => {
-    const productoAgregado = { ...prop.producto, cantidad };
-
-    const nuevoCarrito = [...carrito]
-    const productoEnCarrito = nuevoCarrito.find((producto)=> producto.id === productoAgregado.id)
-    if (productoEnCarrito){
-      productoEnCarrito.cantidad += cantidad
-      setCarrito(nuevoCarrito)
-    }else{
-      console.log("no está")
-      setCarrito([...carrito, productoAgregado])
-    }
-
-
 
     
 
+    
+    const productoAgregado = { ...prop.producto, cantidad };
+    
+    const nuevoCarrito = [...carrito]
+    // const productoEnCarrito = nuevoCarrito.find((producto)=> producto.id === productoAgregado.id)
+    // if (productoEnCarrito){
+    //     productoEnCarrito.cantidad += cantidad
+    //     setCarrito(nuevoCarrito)
+    // }else{
+    //     console.log("no está")
+    //     setCarrito([...carrito, productoAgregado])
+    // }
 
   }
-
  
     return (
   <>
