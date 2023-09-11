@@ -9,8 +9,7 @@ import { contexto } from '../context/CartContext';
 
 
 function ItemDetail(prop) {
-
-  const carrito = useContext(contexto)
+  const { carritoGlobal, setCarritoGlobal } = useContext(contexto);
   const [cantidad, setCantidad] = useState(1)
   const [nuevoStock, setNuevoStock] = useState(null)
 
@@ -31,24 +30,46 @@ function ItemDetail(prop) {
     cantidad < prop.producto.stock && setCantidad (cantidad +1)
   }
 
+
   const handleAgregar = () => {
+    const itemAgregado = { ...prop.producto, cantidad };
 
-    
-
-    
-    const productoAgregado = { ...prop.producto, cantidad };
-    
-    const nuevoCarrito = [...carrito]
-    // const productoEnCarrito = nuevoCarrito.find((producto)=> producto.id === productoAgregado.id)
-    // if (productoEnCarrito){
-    //     productoEnCarrito.cantidad += cantidad
-    //     setCarrito(nuevoCarrito)
+    // const buscarEnCarrito = carritoGlobal.carrito.find((producto)=>producto.id === productoAgregado.id)
+   
+    // if (buscarEnCarrito){
+    //   console.log("está en el carrito")
+    //   productoAgregado[buscarEnCarrito].cantidad += cantidad;
     // }else{
-    //     console.log("no está")
-    //     setCarrito([...carrito, productoAgregado])
+    //   console.log("no está en el carrito")
+    //   productoAgregado.push({ ...prop.producto, cantidad })
+
     // }
 
-  }
+    setCarritoGlobal([...carritoGlobal,itemAgregado])
+
+
+
+  
+  
+    // const productoEnCarritoIndex = nuevoCarrito.findIndex(item => item.id === prop.producto.id);
+
+  // if (productoEnCarritoIndex !== -1) {
+  //   // Si el producto ya está en el carrito, actualiza su cantidad
+  //   nuevoCarrito[productoEnCarritoIndex].cantidad += cantidad;
+  // } else {
+  //   // Si el producto no está en el carrito, agrégalo al carrito
+  //   nuevoCarrito.push({ ...prop.producto, cantidad });
+  // }
+
+  // setCarritoGlobal(nuevoCarrito);
+  
+  };
+
+  useEffect(() => {
+    // Este efecto se ejecutará cada vez que carritoGlobal se actualice
+    console.log("Carrito actualizado:", carritoGlobal);
+  }, [carritoGlobal]);
+  
  
     return (
   <>
