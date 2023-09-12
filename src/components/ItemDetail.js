@@ -10,7 +10,6 @@ import { contexto } from '../context/CartContext';
 
 
 function ItemDetail(prop) {
-  console.log(prop)
   const {handleAgregar} = useContext(contexto);
   const [cantidad, setCantidad] = useState(1)
  
@@ -21,6 +20,7 @@ function ItemDetail(prop) {
     title: prop.producto.title,
     stock: prop.producto.stock,
     price: prop.producto.price,
+    image: prop.producto.images,
   };
 
   const agregarAlCarrito = () => {

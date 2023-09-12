@@ -10,10 +10,9 @@ const CartContext = (prop) => {
   
   
 const [carritoGlobal, setCarritoGlobal] = useState({ carrito: [] });
+console.log(carritoGlobal)
 const [cantidad, setCantidad] = useState(0)
 const [nuevoStock, setNuevoStock] = useState(prop.producto && prop.producto.stock !== undefined ? prop.producto.stock : 0);
-console.log(nuevoStock)
-console.log(carritoGlobal)
 
 
 useEffect(() => {
