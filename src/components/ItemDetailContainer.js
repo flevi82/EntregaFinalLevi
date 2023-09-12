@@ -3,6 +3,7 @@ import { useEffect, useState, } from "react"
 import { useParams } from "react-router-dom";
 import { db } from "../base"
 import { getDoc, doc , collection } from "firebase/firestore"
+import CartContext from '../context/CartContext';
 
 function ItemDetailContainer() {
 
@@ -23,10 +24,14 @@ function ItemDetailContainer() {
       const obtener1Producto = getDoc(refProd)
       
         obtener1Producto
-            .then((resultado) =>{
-              setProducto(resultado.data())
-            })
-
+        .then((resultado) => {
+          const productoData = resultado.data();
+          if (productoData) {
+            // Agrega el 'id' al objeto 'producto'
+            const productoConId = { id: dinam, ...productoData };
+            setProducto(productoConId);
+          }
+          })
             .catch((error) => {
               console.log("Dio mal")
           })
@@ -35,7 +40,10 @@ function ItemDetailContainer() {
     }
 
   return (
-   <ItemDetail producto={producto}/>
+    <>
+      <ItemDetail producto={producto}/>
+      <CartContext producto={producto}/>
+   </>
   )
 }
 

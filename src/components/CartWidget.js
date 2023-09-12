@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom"
 import { contexto } from '../context/CartContext';
 
 function CartWidget() {
-  const numeroCarrito = useContext(contexto)
-  console.log(numeroCarrito.numerosCarrito.cantidadTotal)
+  const { cantidad } = useContext(contexto);
+  console.log(cantidad)
 
   return (
     <NavLink to="./carrito" className="carrito">
         <img src="/cartwhite.svg" alt="carrito" />
-        <p>{numeroCarrito.numerosCarrito.cantidadTotal}</p>
+        <p>{cantidad}</p>
     </NavLink> 
   )
 }

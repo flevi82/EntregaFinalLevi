@@ -4,21 +4,29 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ItemCount from './ItemCount';
 import Spinner from './Spinner';
-import { useContext, useState, useEffect} from 'react';
+import { useContext, useState } from 'react';
 import { contexto } from '../context/CartContext';
 
 
+
 function ItemDetail(prop) {
-  const { carritoGlobal, setCarritoGlobal } = useContext(contexto);
+  console.log(prop)
+  const {handleAgregar} = useContext(contexto);
   const [cantidad, setCantidad] = useState(1)
-  const [nuevoStock, setNuevoStock] = useState(null)
+ 
 
-  useEffect(() => {
 
-    if (prop.producto) {
-      setNuevoStock(prop.producto.stock);
-    }
-  }, [prop.producto.stock]);
+  const item = {
+    id: prop.producto.id,
+    title: prop.producto.title,
+    stock: prop.producto.stock,
+    price: prop.producto.price,
+  };
+
+  const agregarAlCarrito = () => {
+    // Llama a handleAgregar solo cuando el usuario haga clic en el botón de agregar al carrito
+    handleAgregar(item, cantidad);
+  };
 
 
   const handleRestar = () =>{
@@ -29,46 +37,6 @@ function ItemDetail(prop) {
   const handleSumar = () => {
     cantidad < prop.producto.stock && setCantidad (cantidad +1)
   }
-
-
-  const handleAgregar = () => {
-    const itemAgregado = { ...prop.producto, cantidad };
-
-    // const buscarEnCarrito = carritoGlobal.carrito.find((producto)=>producto.id === productoAgregado.id)
-   
-    // if (buscarEnCarrito){
-    //   console.log("está en el carrito")
-    //   productoAgregado[buscarEnCarrito].cantidad += cantidad;
-    // }else{
-    //   console.log("no está en el carrito")
-    //   productoAgregado.push({ ...prop.producto, cantidad })
-
-    // }
-
-    setCarritoGlobal([...carritoGlobal,itemAgregado])
-
-
-
-  
-  
-    // const productoEnCarritoIndex = nuevoCarrito.findIndex(item => item.id === prop.producto.id);
-
-  // if (productoEnCarritoIndex !== -1) {
-  //   // Si el producto ya está en el carrito, actualiza su cantidad
-  //   nuevoCarrito[productoEnCarritoIndex].cantidad += cantidad;
-  // } else {
-  //   // Si el producto no está en el carrito, agrégalo al carrito
-  //   nuevoCarrito.push({ ...prop.producto, cantidad });
-  // }
-
-  // setCarritoGlobal(nuevoCarrito);
-  
-  };
-
-  useEffect(() => {
-    // Este efecto se ejecutará cada vez que carritoGlobal se actualice
-    console.log("Carrito actualizado:", carritoGlobal);
-  }, [carritoGlobal]);
   
  
     return (
@@ -84,13 +52,13 @@ function ItemDetail(prop) {
               <Card.Text>
                 <p>{prop.producto.description}</p>
                 <p>${prop.producto.price}</p>
-                <p>stock: {nuevoStock}</p>
+                <p>stock: {prop.producto.stock}</p>
               </Card.Text>
               <ItemCount 
               cantidad={cantidad}
               handleSumar={handleSumar}
               handleRestar={handleRestar}
-              handleAgregar={handleAgregar}/>
+              handleAgregar={agregarAlCarrito}/>
             </Card.Body>
           </Card>
         </Col>
