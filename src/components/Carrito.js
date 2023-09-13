@@ -10,10 +10,12 @@ import Spinner from './Spinner';
 function Carrito() {
   const { carritoGlobal, handleEliminar } = useContext(contexto);
 
-  const eliminarCarrito = (productoId) => {
-    // Utiliza la función handleEliminar del contexto para eliminar el producto
-    handleEliminar(productoId);
-  };
+
+
+  if (!carritoGlobal.carrito) {
+    // Si carritoGlobal.carrito no está definido, muestra un mensaje
+    return <p>El carrito está vacío.</p>;
+  }
 
   return (
     <Container>
@@ -32,7 +34,7 @@ function Carrito() {
                   <Card.Title>Subtotal: ${producto.price * producto.cantidad}</Card.Title>
                   <Button
                     variant='primary'
-                    onClick={() => eliminarCarrito(producto.id)} // Pasar el productoId al hacer clic en el botón
+                    onClick={() => handleEliminar(producto.id)} // Pasar el productoId al hacer clic en el botón
                   >
                     Quitar del carrito
                   </Button>

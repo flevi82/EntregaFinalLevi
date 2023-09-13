@@ -23,51 +23,45 @@ useEffect(() => {
 
 const calcularCantidadTotal = () => {
   let total = 0;
-  for (const producto of carritoGlobal.carrito) {
-    total += producto.cantidad;
-    console.log(total)
+  if (Array.isArray(carritoGlobal.carrito)) {
+    for (const producto of carritoGlobal.carrito) {
+      total += producto.cantidad;
+      console.log(total)
+    }
+  } else {
+    console.error("carritoGlobal.carrito no es un arreglo válido.");
   }
+
   return total;
 };
 
 
-
 const handleAgregar = (item, cantidad) => {
   setCarritoGlobal((prev) => {
-    // Verifica si el producto ya está en el carrito
     const productoEnCarrito = prev.carrito.find((producto) => producto.id === item.id);
-    
-
 
     if (productoEnCarrito) {
-      // Si el producto ya está en el carrito, actualiza su cantidad
       const nuevoCarrito = prev.carrito.map((producto) =>
         producto.id === item.id ? { ...producto, cantidad: producto.cantidad + cantidad } : producto
       );
       return { ...prev, carrito: nuevoCarrito };
     } else {
-      // Si el producto no está en el carrito, agrégalo al carrito
       return { ...prev, carrito: [...prev.carrito, { ...item, cantidad }] };
     }
-    
   });
-
-  // const descuentaStock = item.stock - cantidad
-  // setNuevoStock(descuentaStock)
   
 };
 
 const handleEliminar = (productoId) => {
-  const nuevoCarrito = carritoGlobal.carrito.filter((producto) => producto.id !== productoId);
+  setCarritoGlobal((prev) => {
+    const nuevoCarrito = prev.carrito.filter((producto) => producto.id !== productoId);
   setCarritoGlobal(nuevoCarrito);
+});
 };
 
 useEffect(() => {
   setCantidad(calcularCantidadTotal());
 }, [carritoGlobal]);
-
-
-
 
 
   return (
