@@ -8,31 +8,42 @@ import Button from 'react-bootstrap/Button';
 import Spinner from './Spinner';
 
 function Carrito() {
+  const { carritoGlobal, handleEliminar } = useContext(contexto);
 
-    const {carritoGlobal, setCarritoGlobal} = useContext(contexto);
-    console.log(carritoGlobal)
-
+  const eliminarCarrito = (productoId) => {
+    // Utiliza la función handleEliminar del contexto para eliminar el producto
+    handleEliminar(productoId);
+  };
 
   return (
     <Container>
       <Row>
-      {carritoGlobal.carrito.length===0 ? <Spinner />: carritoGlobal.carrito.map(cart=> (
-        <Col key={cart.id} sm={6} xs={8} md={4} lg={12} id='tarjetas'>
-        <Card className='h-100' id='tarjetaIndividual'>
-          <Card.Img src={cart.image} className='producto-imagen' />
-          <Card.Body>
-            <Card.Title>{cart.title}</Card.Title>
-            <Card.Text>Precio unitario: ${cart.price}</Card.Text>
-            <Card.Text>Cantidad:{cart.cantidad}</Card.Text>
-            <Card.Title>Subtotal: ${cart.price*cart.cantidad}</Card.Title>
-          <Button variant="primary">Quitar del carrito</Button>
-          </Card.Body>
-        </Card>
-      </Col>
-          ))}
+        {carritoGlobal.carrito.length === 0 ? (
+          <Spinner />
+        ) : (
+          carritoGlobal.carrito.map((producto) => (
+            <Col key={producto.id} sm={6} xs={8} md={4} lg={12} id='tarjetas'>
+              <Card className='h-100' id='tarjetaIndividual'>
+                <Card.Img src={producto.image} className='producto-imagen' />
+                <Card.Body>
+                  <Card.Title>{producto.title}</Card.Title>
+                  <Card.Text>Precio unitario: ${producto.price}</Card.Text>
+                  <Card.Text>Cantidad: {producto.cantidad}</Card.Text>
+                  <Card.Title>Subtotal: ${producto.price * producto.cantidad}</Card.Title>
+                  <Button
+                    variant='primary'
+                    onClick={() => eliminarCarrito(producto.id)} // Pasar el productoId al hacer clic en el botón
+                  >
+                    Quitar del carrito
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+        )}
       </Row>
     </Container>
-  )
+  );
 }
 
-export default Carrito
+export default Carrito;

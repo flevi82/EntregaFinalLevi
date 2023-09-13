@@ -49,13 +49,17 @@ const handleAgregar = (item, cantidad) => {
       // Si el producto no está en el carrito, agrégalo al carrito
       return { ...prev, carrito: [...prev.carrito, { ...item, cantidad }] };
     }
-
     
   });
 
   // const descuentaStock = item.stock - cantidad
   // setNuevoStock(descuentaStock)
   
+};
+
+const handleEliminar = (productoId) => {
+  const nuevoCarrito = carritoGlobal.carrito.filter((producto) => producto.id !== productoId);
+  setCarritoGlobal(nuevoCarrito);
 };
 
 useEffect(() => {
@@ -67,7 +71,7 @@ useEffect(() => {
 
 
   return (
-    <Provider value={{carritoGlobal, setCarritoGlobal, handleAgregar, cantidad, setCantidad}}>   
+    <Provider value={{carritoGlobal, setCarritoGlobal, handleAgregar, handleEliminar, cantidad, setCantidad}}>   
         {prop.children}
     </Provider>
     
