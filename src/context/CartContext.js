@@ -1,7 +1,5 @@
 import  { createContext, useState, useEffect } from "react"
-import ItemDetail from '../components/ItemDetail'
-import { db } from "../base"
-import { getDoc, doc , collection } from "firebase/firestore"
+
 
 export const contexto = createContext()
 const Provider = contexto.Provider
@@ -10,8 +8,6 @@ const CartContext = (prop) => {
   
   
 const [carritoGlobal, setCarritoGlobal] = useState([] );
-console.log(carritoGlobal)
-const [cantidad, setCantidad] = useState(0)
 const [nuevoStock, setNuevoStock] = useState(prop.producto && prop.producto.stock !== undefined ? prop.producto.stock : 0);
 
 
@@ -39,20 +35,23 @@ const handleAgregar = (productToAdd, cantidad) => {
     
   }
   if(isInCart(newObj.id)){
-    carritoGlobal.map(el => {
-        if(el.id === newObj.id)  {
-          el.cantidad += newObj.cantidad
-        }
-        console.log(el)
-        return(el)
-        })
+// guardamos el valor del map en una variable
+    const updatedCarrito = carritoGlobal.map(el => {
+      if(el.id === newObj.id)  {
+        el.cantidad += newObj.cantidad
+      }
+      console.log(el)
+      return(el)
+    })
+// actualizamos el estado con este nuevo dato
+    setCarritoGlobal(updatedCarrito);
 
-    }else {
-      setCarritoGlobal([...carritoGlobal, newObj])
-      
-    }
-   
-  }
+  }else {
+    setCarritoGlobal([...carritoGlobal, newObj])
+    
+  }
+  
+}
   const isInCart = (id) => {
     return carritoGlobal.some(el => el.id === id)
   }
@@ -71,13 +70,10 @@ const calcularMontoTotal = () => {
 };
 
 
-useEffect(() => {
-  setCantidad(calcularCantidadTotal());
-}, [carritoGlobal]);
 
 
   return (
-    <Provider value={{carritoGlobal, setCarritoGlobal, handleAgregar, handleEliminar, cantidad, setCantidad, calcularCantidadTotal, calcularMontoTotal}}>   
+    <Provider value={{carritoGlobal, setCarritoGlobal, handleAgregar, handleEliminar,  calcularCantidadTotal, calcularMontoTotal}}>   
         {prop.children}
     </Provider>
     

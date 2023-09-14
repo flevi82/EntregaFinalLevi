@@ -1,22 +1,20 @@
-import { useParams  } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 import { contexto } from '../context/CartContext';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp,  doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from "../base"
 
 
 
 function Checkout() {
 
-    
-    const [carritoFinal, setCarritoFinal] = useState({});
-    const [token, setToken] = useState("")
+    const navigate = useNavigate();
+    const [token, setToken] = useState('')
     const { carritoGlobal, setCarritoGlobal } = useContext(contexto)
     const { montoTotal } = useParams();
     const [validated, setValidated] = useState(false);
@@ -32,7 +30,7 @@ function Checkout() {
       if (form.checkValidity() === false) {
         event.stopPropagation();
       } else {
-        // Form is valid, combine form data with carritoGlobal
+
         const combinedData = {
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -40,32 +38,50 @@ function Checkout() {
           fecha: serverTimestamp(),
           items: carritoGlobal,
         };
+
+        carritoGlobal.forEach(async (item) => {
+          const productDocRef = doc(db, 'productos', item.id);
+          const productDoc = await getDoc(productDocRef);
         
-        setCarritoFinal(combinedData);
-        console.log(carritoFinal)
+          if (productDoc.exists()) {
+            const productData = productDoc.data();
+            const newStock = productData.stock - item.cantidad;
+        
+            if (newStock >= 0) {
+              // Actualiza el stock en Firestore
+              await updateDoc(productDocRef, { stock: newStock });
+            } else {
+              // Maneja el caso en el que el stock es insuficiente
+              console.error(`Stock insuficiente para el producto con ID ${item.id}`);
+            }
+          } else {
+            // Maneja el caso en el que el producto no existe
+            console.error(`El producto con ID ${item.id} no existe`);
+          }
+        });
+
+        const pedidosCollection = collection(db, "pedidos");
+        addDoc(pedidosCollection, combinedData)
+        .then((resultado)=> {
+
+          setToken(resultado.id);
+          console.log(resultado.id)
+          console.log("Se guardo la venta");
+          setCarritoGlobal([])
+        })
+
+        
   }
       setValidated(true);
-    };
+      navigate('/final/'+{token}); 
 
-    useEffect(() => {
-        const pedidosCollection = collection(db, "pedidos");
-        const pedido = addDoc(pedidosCollection, carritoFinal);
-        pedido
-          .then((resultado) => {
-            console.log("Se guardo la venta");
-            console.log(resultado);
-            setToken(resultado.id);
-          })
-          .catch((error) => {
-            console.log(error);
-            console.log("Dio mal");
-          }); 
-    }, [validated, carritoFinal]);
+      
+    };
 
-    useEffect(() => {
-      setCarritoGlobal([]); 
-      console.log(carritoFinal)
-    }, []);
+
+  
+
+
 
       const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -128,7 +144,7 @@ return(
     </Row>
     <h3 className='textoCentrado'>Total de tu compra: ${montoTotal}</h3>
     <Row className="mb-3">
-    <Link to="/final"><Button type="submit">Submit form</Button></Link>
+    <Button type="submit">Submit form</Button>
     </Row>
   </Form>
 

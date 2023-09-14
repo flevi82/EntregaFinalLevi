@@ -1,10 +1,12 @@
-
+import { useParams } from 'react-router-dom';
 
 function Final() {
+
+  const {token} = useParams()
     
 
   return (
-   <div>FINAL</div>
+   <p>{token}</p>
   )
 }
 

@@ -12,7 +12,7 @@ function ItemCount({handleRestar, handleSumar, handleAgregar, cantidad}) {
     <Button variant="outline-dark" height="15" width="15" onClick={handleSumar}>+</Button>
     </div>
     <div className="botonAgregar">
-    <Button variant="primary"  onClick={handleAgregar}>Agregar al carrito</Button> 
+    <Button variant="primary"  onClick={handleAgregar} disabled={cantidad === 0}>Agregar al carrito</Button> 
     </div>
     </div>
   );
