@@ -1,29 +1,33 @@
 import { contexto } from '../context/CartContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {Link} from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Spinner from './Spinner';
 
 function Carrito() {
-  const { carritoGlobal, handleEliminar } = useContext(contexto);
+  const { carritoGlobal, handleEliminar, calcularMontoTotal } = useContext(contexto);
+  console.log(carritoGlobal)
 
 
 
-  if (!carritoGlobal.carrito) {
-    // Si carritoGlobal.carrito no está definido, muestra un mensaje
+
+  if (!carritoGlobal) {
     return <p>El carrito está vacío.</p>;
   }
 
+  const montoTotal = calcularMontoTotal();
+
   return (
+  <div>
     <Container>
       <Row>
-        {carritoGlobal.carrito.length === 0 ? (
-          <Spinner />
+      {carritoGlobal.length === 0 ? (
+          <p>El carrito está vacío.</p>
         ) : (
-          carritoGlobal.carrito.map((producto) => (
+          carritoGlobal.map((producto) => (
             <Col key={producto.id} sm={6} xs={8} md={4} lg={12} id='tarjetas'>
               <Card className='h-100' id='tarjetaIndividual'>
                 <Card.Img src={producto.image} className='producto-imagen' />
@@ -34,17 +38,24 @@ function Carrito() {
                   <Card.Title>Subtotal: ${producto.price * producto.cantidad}</Card.Title>
                   <Button
                     variant='primary'
-                    onClick={() => handleEliminar(producto.id)} // Pasar el productoId al hacer clic en el botón
-                  >
-                    Quitar del carrito
-                  </Button>
+                    onClick={() => handleEliminar(producto.id)}>Quitar del carrito</Button>
                 </Card.Body>
               </Card>
             </Col>
           ))
         )}
       </Row>
-    </Container>
+      <Row>
+      {carritoGlobal.length === 0 ? null :  
+      <>
+        <Link to={`/checkout/${montoTotal}`}><Button variant='primary'>Confirmar compra</Button></Link>
+        <h3>Total pedido: ${montoTotal}</h3> 
+      </>
+    }
+    </Row>
+  </Container>
+</div>
+    
   );
 }
 

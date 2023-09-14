@@ -16,27 +16,22 @@ function ItemDetailContainer() {
   },[])
 
   const get1Producto = ()=>{
-
-    setTimeout(()=>{
      
-      const productosCollection = collection(db, "productos")
-      const refProd = doc(productosCollection,dinam)
-      const obtener1Producto = getDoc(refProd)
+    const productosCollection = collection(db, "productos")
+    const refProd = doc(productosCollection,dinam)
+    const obtener1Producto = getDoc(refProd)
       
-        obtener1Producto
-        .then((resultado) => {
-          const productoData = resultado.data();
-          if (productoData) {
-            // Agrega el 'id' al objeto 'producto'
-            const productoConId = { id: dinam, ...productoData };
-            setProducto(productoConId);
-          }
-          })
-            .catch((error) => {
-              console.log("Dio mal")
-          })
-
-    }, 2000)    
+    obtener1Producto
+      .then((resultado) => {
+        const productoData = resultado.data();
+        if (productoData) {
+        const productoConId = { id: dinam, ...productoData };
+        setProducto(productoConId);
+        }
+        })
+      .catch((error) => {
+        console.log("Dio mal")
+      })
     }
 
   return (
@@ -46,5 +41,4 @@ function ItemDetailContainer() {
    </>
   )
 }
-
 export default ItemDetailContainer

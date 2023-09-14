@@ -12,9 +12,6 @@ import { contexto } from '../context/CartContext';
 function ItemDetail(prop) {
   const {handleAgregar} = useContext(contexto);
   const [cantidad, setCantidad] = useState(1)
- 
-
-
   const item = {
     id: prop.producto.id,
     title: prop.producto.title,
@@ -24,10 +21,8 @@ function ItemDetail(prop) {
   };
 
   const agregarAlCarrito = () => {
-    // Llama a handleAgregar solo cuando el usuario haga clic en el botón de agregar al carrito
     handleAgregar(item, cantidad);
   };
-
 
   const handleRestar = () =>{
     cantidad > 1 && setCantidad (cantidad -1)
@@ -38,7 +33,6 @@ function ItemDetail(prop) {
     cantidad < prop.producto.stock && setCantidad (cantidad +1)
   }
   
- 
     return (
   <>
     <Container>

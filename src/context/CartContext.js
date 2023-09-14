@@ -9,7 +9,7 @@ const Provider = contexto.Provider
 const CartContext = (prop) => {
   
   
-const [carritoGlobal, setCarritoGlobal] = useState({ carrito: [] });
+const [carritoGlobal, setCarritoGlobal] = useState([] );
 console.log(carritoGlobal)
 const [cantidad, setCantidad] = useState(0)
 const [nuevoStock, setNuevoStock] = useState(prop.producto && prop.producto.stock !== undefined ? prop.producto.stock : 0);
@@ -22,42 +22,54 @@ useEffect(() => {
 }, [prop.producto]);
 
 const calcularCantidadTotal = () => {
-  let total = 0;
-  if (Array.isArray(carritoGlobal.carrito)) {
-    for (const producto of carritoGlobal.carrito) {
-      total += producto.cantidad;
-      console.log(total)
-    }
-  } else {
-    console.error("carritoGlobal.carrito no es un arreglo válido.");
-  }
+  const total = carritoGlobal.reduce((accumulator, producto) => {
+    return accumulator + producto.cantidad;
+  }, 0);
 
+  console.log(total);
   return total;
 };
 
 
-const handleAgregar = (item, cantidad) => {
-  setCarritoGlobal((prev) => {
-    const productoEnCarrito = prev.carrito.find((producto) => producto.id === item.id);
 
-    if (productoEnCarrito) {
-      const nuevoCarrito = prev.carrito.map((producto) =>
-        producto.id === item.id ? { ...producto, cantidad: producto.cantidad + cantidad } : producto
-      );
-      return { ...prev, carrito: nuevoCarrito };
-    } else {
-      return { ...prev, carrito: [...prev.carrito, { ...item, cantidad }] };
+const handleAgregar = (productToAdd, cantidad) => {
+  const newObj = {
+    ...productToAdd,
+    cantidad
+    
+  }
+  if(isInCart(newObj.id)){
+    carritoGlobal.map(el => {
+        if(el.id === newObj.id)  {
+          el.cantidad += newObj.cantidad
+        }
+        console.log(el)
+        return(el)
+        })
+
+    }else {
+      setCarritoGlobal([...carritoGlobal, newObj])
+      
     }
-  });
-  
+   
+  }
+  const isInCart = (id) => {
+    return carritoGlobal.some(el => el.id === id)
+  }
+const handleEliminar = (productoId) => {
+  const nuevoCarrito = carritoGlobal.filter((producto) => producto.id !== productoId);
+  console.log(`eliminaste el id ${productoId}`)
+  setCarritoGlobal([...nuevoCarrito]);
 };
 
-const handleEliminar = (productoId) => {
-  setCarritoGlobal((prev) => {
-    const nuevoCarrito = prev.carrito.filter((producto) => producto.id !== productoId);
-  setCarritoGlobal(nuevoCarrito);
-});
+const calcularMontoTotal = () => {
+  const total = carritoGlobal.reduce((accumulator, producto) => {
+    return accumulator + (producto.cantidad*producto.price);
+  }, 0);
+  console.log(total);
+  return total;
 };
+
 
 useEffect(() => {
   setCantidad(calcularCantidadTotal());
@@ -65,7 +77,7 @@ useEffect(() => {
 
 
   return (
-    <Provider value={{carritoGlobal, setCarritoGlobal, handleAgregar, handleEliminar, cantidad, setCantidad}}>   
+    <Provider value={{carritoGlobal, setCarritoGlobal, handleAgregar, handleEliminar, cantidad, setCantidad, calcularCantidadTotal, calcularMontoTotal}}>   
         {prop.children}
     </Provider>
     
