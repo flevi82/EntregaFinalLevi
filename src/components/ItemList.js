@@ -17,7 +17,7 @@ function ItemList() {
   },[links.id])
 
   const getProducto = ()=>{
-    setTimeout(()=>{
+    
 
 
   const productosCollection = collection(db, "productos")
@@ -57,7 +57,7 @@ function ItemList() {
                 console.log("Dio mal")
             })
 
-          }, 2000)
+          
 
       }
 

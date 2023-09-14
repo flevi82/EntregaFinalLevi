@@ -11,7 +11,7 @@ import { contexto } from '../context/CartContext';
 
 function ItemDetail(prop) {
   const {handleAgregar} = useContext(contexto);
-  const [cantidad, setCantidad] = useState(prop.producto.stock > 0 ? 1 : 0)
+  const [cantidad, setCantidad] = useState(1)
   const item = {
     id: prop.producto.id,
     title: prop.producto.title,

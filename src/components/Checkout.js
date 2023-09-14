@@ -14,7 +14,6 @@ import { db } from "../base"
 function Checkout() {
 
     const navigate = useNavigate();
-    const [token, setToken] = useState('')
     const { carritoGlobal, setCarritoGlobal } = useContext(contexto)
     const { montoTotal } = useParams();
     const [validated, setValidated] = useState(false);
@@ -63,25 +62,13 @@ function Checkout() {
         const pedidosCollection = collection(db, "pedidos");
         addDoc(pedidosCollection, combinedData)
         .then((resultado)=> {
-
-          setToken(resultado.id);
-          console.log(resultado.id)
           console.log("Se guardo la venta");
           setCarritoGlobal([])
-        })
-
-        
+          navigate('/final/'+ resultado.id); 
+        })  
   }
       setValidated(true);
-      navigate('/final/'+{token}); 
-
-      
     };
-
-
-  
-
-
 
       const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -91,7 +78,6 @@ function Checkout() {
         });
       };
     
-
 return( 
     <Form noValidate validated={validated} onSubmit={handleSubmit} id='checkout'>
     <h2 className='textoCentrado'>Completá tus datos</h2>
@@ -144,7 +130,7 @@ return(
     </Row>
     <h3 className='textoCentrado'>Total de tu compra: ${montoTotal}</h3>
     <Row className="mb-3">
-    <Button type="submit">Submit form</Button>
+    <Button type="submit">Confirmar compra</Button>
     </Row>
   </Form>
 

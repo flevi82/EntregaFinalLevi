@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Vandalay Multitienda
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto es un Ecommerce para venta de Celulares y Laptops
 
-## Available Scripts
 
-In the project directory, you can run:
+# Tecnologías utilizadas
 
-### `npm start`
+Para el proyecto se utilizó:
+React: v.18.2.0
+React bootstrap: v.2.8.0
+React Router Dom: v.6.5.0
+React Spinners: v.0.13.8
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Acceso al repositorio y a la aplicación
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Abrir el enlace: Primero, abrí tu navegador web y visitá el enlace del repositorio: https://github.com/flevi82/Preentrega2Levi. Verás la página principal del repositorio.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Cloná el Repositorio: Si querés trabajar con este proyecto en tu propia computadora, podés clonar el repositorio. Para hacerlo, hacé clic en el botón verde "Code" en la parte superior derecha y copiá la URL del repositorio. Luego, en tu computadora, abrí una terminal o línea de comandos y ejecutpa el siguiente comando (asegúrate de tener Git instalado):
 
-### `npm run build`
+git clone https://github.com/flevi82/Preentrega2Levi.git
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Instalar Dependencias: Una vez que hayas clonado el repositorio, navegá al directorio raíz del proyecto (el que acabas de clonar) utilizando el comando cd en tu terminal. Luego, verificá si hay un archivo package.json. Si lo hay, significa que el proyecto utiliza dependencias de Node.js. Para instalar estas dependencias, ejecuta:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Esto instalará todas las dependencias necesarias para ejecutar la aplicación.
 
-### `npm run eject`
+Iniciar la Aplicación: Después de que se hayan instalado las dependencias,  ejecutá el comando de inicio:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Esto debería iniciar la aplicación y mostrar un mensaje en la terminal indicando en qué puerto está funcionando la aplicación (por ejemplo, "Server running on port 3000").
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Acceder a la Aplicación: Abrí tu navegador web y pegá la dirección proporcionada en la terminal (por ejemplo, http://localhost:3000). Esto te llevará a la aplicación en ejecución en tu máquina local.

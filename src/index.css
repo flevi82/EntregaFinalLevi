@@ -88,3 +88,17 @@ background-position: left;
     justify-content: center;
 }
 
+.cuadro{
+    background-color: rgba(255, 255, 255, 0.562) !important;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.volver{
+    margin-top: 20px;
+}
+

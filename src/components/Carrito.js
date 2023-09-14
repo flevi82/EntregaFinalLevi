@@ -1,5 +1,5 @@
 import { contexto } from '../context/CartContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,13 +9,16 @@ import Button from 'react-bootstrap/Button';
 
 function Carrito() {
   const { carritoGlobal, handleEliminar, calcularMontoTotal } = useContext(contexto);
-  console.log(carritoGlobal)
-
-
 
 
   if (!carritoGlobal) {
-    return <p>El carrito está vacío.</p>;
+    return (
+      <div className='cuadro'>
+      <h2>El carrito está vacío.</h2>
+      <Link to={'/'}><Button variant="primary" className='volver'>Seguir comprando</Button></Link>
+      </div>
+    )
+    
   }
 
   const montoTotal = calcularMontoTotal();
@@ -25,7 +28,10 @@ function Carrito() {
     <Container>
       <Row>
       {carritoGlobal.length === 0 ? (
-          <p>El carrito está vacío.</p>
+          <div className='cuadro'>
+          <h2>El carrito está vacío.</h2>
+          <Link to={'/'}><Button variant="primary" className='volver'>Seguir comprando</Button></Link>
+          </div>
         ) : (
           carritoGlobal.map((producto) => (
             <Col key={producto.id} sm={6} xs={8} md={4} lg={12} id='tarjetas'>

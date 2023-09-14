@@ -1,4 +1,4 @@
-import  { createContext, useState, useEffect } from "react"
+import  { createContext, useState } from "react"
 
 
 export const contexto = createContext()
@@ -8,21 +8,13 @@ const CartContext = (prop) => {
   
   
 const [carritoGlobal, setCarritoGlobal] = useState([] );
-const [nuevoStock, setNuevoStock] = useState(prop.producto && prop.producto.stock !== undefined ? prop.producto.stock : 0);
 
-
-useEffect(() => {
-  if (prop.producto && prop.producto.stock !== undefined) {
-    setNuevoStock(prop.producto.stock);
-  }
-}, [prop.producto]);
 
 const calcularCantidadTotal = () => {
   const total = carritoGlobal.reduce((accumulator, producto) => {
     return accumulator + producto.cantidad;
   }, 0);
 
-  console.log(total);
   return total;
 };
 
@@ -35,7 +27,7 @@ const handleAgregar = (productToAdd, cantidad) => {
     
   }
   if(isInCart(newObj.id)){
-// guardamos el valor del map en una variable
+
     const updatedCarrito = carritoGlobal.map(el => {
       if(el.id === newObj.id)  {
         el.cantidad += newObj.cantidad
@@ -43,7 +35,7 @@ const handleAgregar = (productToAdd, cantidad) => {
       console.log(el)
       return(el)
     })
-// actualizamos el estado con este nuevo dato
+
     setCarritoGlobal(updatedCarrito);
 
   }else {
@@ -65,7 +57,6 @@ const calcularMontoTotal = () => {
   const total = carritoGlobal.reduce((accumulator, producto) => {
     return accumulator + (producto.cantidad*producto.price);
   }, 0);
-  console.log(total);
   return total;
 };
 
